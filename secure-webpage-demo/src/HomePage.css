@@ -1,0 +1,42 @@
+.homepage {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9fafb; /* Very light gray background */
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.homepage-content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+
+.cta-button {
+    background-color: #d1d5db; /* Light gray */
+    color: #111827; /* Dark gray text */
+    border: 1px solid transparent; /* For consistent height */
+    padding: 10px 20px; /* Adjust padding for button size */
+    border-radius: 4px;
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #9ca3af; /* Darker gray on hover */
+    color: white; /* White text on hover */
+    border-color: #6b7280; /* Border color on hover */
+}
+
+.homepage-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6b7280; /* Dark gray for footer text */
+}
