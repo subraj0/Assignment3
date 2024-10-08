@@ -5,15 +5,15 @@ import "../Posts.css"
 
 interface PostItem {
     id: number;
-    file: string; // URL to the media file
+    file: string; 
     description: string;
     uploaded_at: string;
-    group: number; // Added group for filtering
-    user: number; // Added user for filtering
+    group: number; 
+    user: number; 
 }
 
 interface ViewPostProps {
-    isLoggedIn: boolean; // Add login status prop
+    isLoggedIn: boolean; 
 }
 
 const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
@@ -21,7 +21,7 @@ const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
     const [userGroups, setUserGroups] = useState<number[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    const token = localStorage.getItem('token'); // Get token from localStorage
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchUserGroups = async () => {
@@ -35,9 +35,9 @@ const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
                 });
                 const userId = Number(localStorage.getItem('userId'));
                 const filteredGroups = response.data.filter((group: { members: number[] }) =>
-                    group.members.includes(userId) // Ensure userId is valid
+                    group.members.includes(userId) 
                 );
-                setUserGroups(filteredGroups.map(group => group.id)); // Set only group IDs
+                setUserGroups(filteredGroups.map(group => group.id)); 
             } catch (error) {
                 console.error('Error fetching user groups:', error);
                 toast.error("Failed to fetch groups. Please try again.");
@@ -45,7 +45,7 @@ const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
         };
 
         if (isLoggedIn) {
-            fetchUserGroups(); // Fetch user groups if logged in
+            fetchUserGroups();
         }
     }, [isLoggedIn, token]);
 
@@ -54,12 +54,11 @@ const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
             try {
                 const response = await axios.get('http://localhost:8000/api/upload', {
                     headers: {
-                        Authorization: `Token ${token}`, // Use token for authentication
+                        Authorization: `Token ${token}`, 
                     }
                 });
                 const allMedia: PostItem[] = response.data;
 
-                // Filter media items based on user groups
                 const accessibleMedia = allMedia.filter((media) =>
                     userGroups.includes(media.group)
                 );
@@ -73,7 +72,7 @@ const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
         };
 
         if (userGroups.length > 0) {
-            fetchMedia(); // Fetch media if user groups have been fetched
+            fetchMedia(); 
         }
     }, [userGroups, token]);
 
@@ -99,7 +98,7 @@ const ViewPosts: React.FC<ViewPostProps> = ({ isLoggedIn }) => {
                             </video>
                         ) : media.file.endsWith('.txt') || media.file.endsWith('.bin') || media.file.endsWith('.pdf') ? (
                             <div className="file-icon">
-                                <p>This is a {media.file.endsWith('.txt') ? 'text' : media.file.endsWith('.bin') ? 'binary' : 'PDF'} file.</p>
+                                <p>{media.file}.</p>
                                 <a href={media.file} download className="download-link">Download</a>
                             </div>
                         ) : (

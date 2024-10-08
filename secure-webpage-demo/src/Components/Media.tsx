@@ -25,7 +25,7 @@ const MediaUpload = ({ isLoggedIn }) => {
                 const response = await axios.get('http://localhost:8000/api/groups', {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': csrfToken,  // Include CSRF token here
+                        'X-CSRFToken': csrfToken,
                         'Authorization': `Token ${token}`
                     },
                     withCredentials: true,
@@ -33,7 +33,7 @@ const MediaUpload = ({ isLoggedIn }) => {
                 const userId = localStorage.getItem('userId');
                 const userIdAsNumber = userId ? parseInt(userId, 10) : null;
                 const filteredGroups = response.data.filter(group => 
-                    userIdAsNumber !== null && group.members.includes(userIdAsNumber) // Ensure userIdAsNumber is valid
+                    userIdAsNumber !== null && group.members.includes(userIdAsNumber)
                 );
                 console.log(userId);
                 console.log(filteredGroups);

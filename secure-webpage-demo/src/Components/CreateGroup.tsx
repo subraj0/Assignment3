@@ -24,7 +24,7 @@ const CreateGroup = ({ isLoggedIn }) => {
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Token ${token}`  // Use token for authentication
+                    'Authorization': `Token ${token}`
                 },
                 withCredentials: true,
             });
